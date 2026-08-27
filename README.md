@@ -1,5 +1,17 @@
 # React + TypeScript + Vite
 
+## Local API and Vercel Functions
+
+The original Node API remains in `server/index.mjs` and can be started locally with:
+
+```bash
+npm run api
+```
+
+The `api/` directory contains Vercel serverless equivalents for creating a Monobank invoice and receiving its webhook. On Vercel, configure the variables from `.env.example` in Project Settings. `PUBLIC_APP_URL` must be the deployed site URL, and `MONOBANK_WEBHOOK_URL` should point to `/api/monobank/webhook`.
+
+For reliable delivery of the paid-order email, connect Vercel KV/Upstash Redis and set `KV_REST_API_URL` and `KV_REST_API_TOKEN`. Without them, serverless functions use temporary in-memory storage intended only for local/testing scenarios.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
