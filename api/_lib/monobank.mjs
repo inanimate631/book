@@ -10,7 +10,7 @@ import {
 
 const monobankToken = process.env.MONOBANK_TOKEN
 const bookPrice = Number(process.env.BOOK_PRICE_UAH)
-const orderEmail = process.env.ORDER_EMAIL || 'book@denkiiashko.com'
+const orderEmail = process.env.ORDER_EMAIL || 'info@denkiiashko.com'
 const publicAppUrl = process.env.PUBLIC_APP_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL
 const configuredWebhookUrl = process.env.MONOBANK_WEBHOOK_URL
 let monobankPublicKey

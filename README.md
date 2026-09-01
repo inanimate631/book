@@ -12,6 +12,8 @@ The `api/` directory contains Vercel serverless equivalents for creating a Monob
 
 For reliable delivery of the paid-order email, connect Vercel KV/Upstash Redis and set `KV_REST_API_URL` and `KV_REST_API_TOKEN`. Without them, serverless functions use temporary in-memory storage intended only for local/testing scenarios.
 
+Nova Poshta city and warehouse lookups are proxied through `/api/nova-poshta/cities` and `/api/nova-poshta/warehouses`. Set `NOVA_POSHTA_API_KEY` in the environment. Lookup responses are cached in Node.js memory for 24 hours by default; override this with `NOVA_POSHTA_CACHE_TTL_MS`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
