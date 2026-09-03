@@ -18,7 +18,7 @@ export function BookIntroSection() {
         <Reveal className="book-intro-social" delay={120}>
           <SocialLinks />
         </Reveal>
-        <Reveal className="book-intro-cta" delay={180}>
+        <Reveal className="book-intro-cta" delay={180} rootMargin="0px">
           <a className="outline-button" href="#order">ЗАМОВИТИ КНИГУ</a>
         </Reveal>
       </div>
