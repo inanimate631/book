@@ -653,6 +653,12 @@
   }
 }
 
+@media (max-width: 1300px) {
+  .book-page .header-button--fixed {
+    right: max(20px, (100% - 1280px) / 2 + 20px + 45px);
+  }
+}
+
 @media (max-width: 960px) {
   .book-intro-stage {
     margin-left: 11.5%;
