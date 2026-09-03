@@ -25,7 +25,7 @@ export function Header({ variant = 'default', compact = false }: ExtendedHeaderP
         </a>
         <nav className={`nav ${isMenuOpen ? 'is-open' : ''}`} aria-label="Головна навігація">
           {navigation.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
+            <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
           ))}
           <a className="nav-mobile-book" href="/book" onClick={() => setMenuOpen(false)}>КНИГА</a>
         </nav>

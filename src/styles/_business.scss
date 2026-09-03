@@ -12,8 +12,7 @@
 .hero-wrapper {
   position: relative;
   width: min(var(--hero-image-width), calc(100% - var(--hero-side-space)));
-  height: min(var(--hero-image-height), calc(100vh - 40px - 40px));
-  aspect-ratio: auto;
+  aspect-ratio: 1104 / 837;
   margin-left: 11%;
   container-type: inline-size;
 }
@@ -52,8 +51,8 @@
   z-index: 2;
   left: 2.8%;
   bottom: 10.5%;
-  width: 52px;
-  height: 52px;
+  width: clamp(40px, 4.71cqw, 52px);
+  height: clamp(40px, 4.71cqw, 52px);
   display: block;
   transition: transform 0.25s ease;
 }
@@ -125,16 +124,12 @@
   top: 43.6%;
   left: -13%;
   color: #a0000c;
-
-  @media ((max-height: 870px) and (min-width: 700px)) {
-    top: 20%;
-  }
 }
 
 .hero-social {
   position: absolute;
   z-index: 4;
-  left: -60px;
+  left: -5.43cqw;
   top: 70.9%;
 }
 
@@ -275,10 +270,13 @@
   z-index: 4;
   left: -9.7%;
   bottom: 0;
-  width: clamp(240px, 36cqw, 400px);
+  width: clamp(190px, 36cqw, 400px);
 }
 
 .hero-cta .outline-button {
+  min-height: clamp(38px, 4.53cqw, 50px);
+  padding: 0 clamp(8px, 1.09cqw, 12px);
+  font-size: clamp(14px, 1.81cqw, 20px);
   width: 100%;
   border-color: var(--white);
   background: var(--white);
@@ -299,7 +297,7 @@
   display: none;
 }
 
-@media ((max-height: 870px) and (min-width: 700px)) {
+@media ((max-width: 1200px)) {
   .hero-copy {
     top: 40%;
   }
@@ -307,36 +305,19 @@
   .hero-social {
     top: 65%;
   }
-
-  .hero-card {
-    height: 98%;
-  }
 }
 
-@media ((max-height: 705px) and (min-width: 700px)) {
+@media ((max-width: 975px)) {
   .hero-copy {
     top: 30%;
   }
 
   .hero-social {
-    top: 60%;
-  }
-  .hero-card {
-    height: 95%;
-  }
-}
-
-@media ((max-height: 650px) and (min-width: 700px)) {
-  .hero-copy {
-    top: 20%;
-  }
-
-  .hero-social {
-    top: 50%;
+    top: 55%;
   }
 
   .hero-card {
-    padding-top: 15px;
+    height: 98%;
   }
 }
 
@@ -438,6 +419,7 @@
   .hero-wrapper {
     width: 100%;
     height: 761px;
+    aspect-ratio: auto;
     margin: 0;
     container-type: normal;
   }
@@ -585,25 +567,18 @@
   }
 }
 
-@media (min-width: 960px) and (max-width: 1044px) {
-  .hero-wrapper {
-    max-height: 750px;
-  }
-}
-
 @media (min-width: 701px) and (max-width: 960px) {
   .hero-wrapper {
-    max-height: 650px;
+    margin-top: 55px;
   }
-  .hero-card {
-    margin-top: 50px;
-    height: 92%;
-    padding-right: 30px;
-    padding-left: 5px;
+
+  .hero-copy {
+    top: 15%;
   }
 
   .hero-social {
-    top: 65%;
+    top: 38%;
+    left: -9cqw;
   }
 
   .business-page .site-header {
