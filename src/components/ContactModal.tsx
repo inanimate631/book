@@ -40,7 +40,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     payload.set('email', String(formData.get('email') ?? ''))
     payload.set('comment', String(formData.get('comment') ?? ''))
     payload.set('_replyto', String(formData.get('email') ?? ''))
-    payload.set('_subject', 'Нове повідомлення з сайту K PRODATY')
+    payload.set('_subject', 'Нове повідомлення з сайту denkiiashko.com')
     payload.set('_template', 'table')
 
     try {
@@ -73,9 +73,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           </div>
         ) : (
           <form className="contact-form" onSubmit={handleSubmit}>
-            <label>ВАШЕ ІМ’Я<input name="name" autoComplete="name" required /></label>
-            <label>E-MAIL<input name="email" type="email" autoComplete="email" required /></label>
-            <label>КОМЕНТАРІЙ<textarea name="comment" rows={4} required /></label>
+            <div className="contact-field">
+              <label htmlFor="contact-name">ВАШЕ ІМ’Я</label>
+              <input id="contact-name" name="name" autoComplete="name" required />
+            </div>
+            <div className="contact-field">
+              <label htmlFor="contact-email">E-MAIL</label>
+              <input id="contact-email" name="email" type="email" autoComplete="email" required />
+            </div>
+            <div className="contact-field contact-field--comment">
+              <label htmlFor="contact-comment">КОМЕНТАРІЙ</label>
+              <textarea id="contact-comment" name="comment" rows={4} required />
+            </div>
             {submitState === 'error' && <p className="contact-error">Не вдалося надіслати повідомлення. Спробуйте ще раз.</p>}
             <button className="outline-button contact-submit" type="submit" disabled={submitState === 'sending'}>
               {submitState === 'sending' ? 'НАДСИЛАЄМО...' : 'ВІДПРАВИТИ'}

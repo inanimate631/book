@@ -29,6 +29,7 @@
   --violet: #4d2cff;
   --font-ui: 'Unbounded', Arial, sans-serif;
   --font-content: 'Kharkiv Tone', 'Trebuchet MS', Arial, sans-serif;
+  --title-size: clamp(40px, 5.56vw, 80px);
 }
 
 * {

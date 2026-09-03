@@ -1,12 +1,13 @@
 import { createVerify, randomUUID } from 'node:crypto'
 import http from 'node:http'
+import { getCities, getNovaPoshtaErrorStatus, getWarehouses } from '../api/_lib/novaPoshta.mjs'
 
 const port = Number(process.env.API_PORT || 8787)
 const host = process.env.API_HOST || '0.0.0.0'
 const publicBaseUrl = process.env.PUBLIC_APP_URL || 'http://127.0.0.1:5173'
 const monobankToken = process.env.MONOBANK_TOKEN
 const bookPrice = Number(process.env.BOOK_PRICE_UAH)
-const orderEmail = process.env.ORDER_EMAIL || 'book@denkiiashko.com'
+const orderEmail = process.env.ORDER_EMAIL || 'info@denkiiashko.com'
 const monobankWebhookUrl = process.env.MONOBANK_WEBHOOK_URL
 const pendingOrders = new Map()
 const processingInvoices = new Set()
@@ -164,6 +165,34 @@ const server = http.createServer(async (request, response) => {
       sendJson(response, 500, { message: error instanceof Error ? error.message : 'Помилка webhook' })
     }
     return
+  }
+
+  if (request.method === 'GET') {
+    const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`)
+
+    if (url.pathname === '/api/nova-poshta/cities') {
+      try {
+        const cities = await getCities(url.searchParams.get('search'))
+        sendJson(response, 200, { data: cities })
+      } catch (error) {
+        sendJson(response, getNovaPoshtaErrorStatus(error), {
+          message: error instanceof Error ? error.message : 'Помилка Нової пошти',
+        })
+      }
+      return
+    }
+
+    if (url.pathname === '/api/nova-poshta/warehouses') {
+      try {
+        const warehouses = await getWarehouses(url.searchParams.get('cityRef'))
+        sendJson(response, 200, { data: warehouses })
+      } catch (error) {
+        sendJson(response, getNovaPoshtaErrorStatus(error), {
+          message: error instanceof Error ? error.message : 'Помилка Нової пошти',
+        })
+      }
+      return
+    }
   }
 
   if (request.method !== 'POST' || request.url !== '/api/create-invoice') {

@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { createCardInvoice, submitCashOrder } from '../../services/orderService'
+import { createCardInvoice } from '../../services/orderService'
+import { NovaPoshtaFields } from '../NovaPoshtaFields'
+import type { NovaPoshtaSelection } from '../NovaPoshtaFields'
 import { Reveal } from '../Reveal'
+import costImage from '../../assets/cost.png'
+import mobileOrderImage from '../../assets/mobile/order.png'
 
 export function OrderSection() {
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [delivery, setDelivery] = useState<NovaPoshtaSelection>({ city: null, warehouse: null })
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -17,23 +22,22 @@ export function OrderSection() {
       phone: String(formData.get('phone') ?? ''),
       email: String(formData.get('email') ?? ''),
       address: String(formData.get('address') ?? ''),
-      payment: String(formData.get('payment') ?? 'card') === 'cash' ? 'cash' as const : 'card' as const,
+      payment: 'card' as const,
       comment: String(formData.get('comment') ?? ''),
+    }
+
+    if (!delivery.city || !delivery.warehouse) {
+      setSubmitState('error')
+      setErrorMessage('Оберіть місто та відділення Нової пошти')
+      return
     }
 
     setSubmitState('sending')
     setErrorMessage('')
 
     try {
-      if (order.payment === 'card') {
-        const pageUrl = await createCardInvoice(order)
-        window.location.assign(pageUrl)
-        return
-      }
-
-      await submitCashOrder(order)
-      form.reset()
-      setSubmitState('success')
+      const pageUrl = await createCardInvoice(order)
+      window.location.assign(pageUrl)
     } catch (error) {
       setSubmitState('error')
       setErrorMessage(error instanceof Error ? error.message : 'Спробуйте ще раз')
@@ -43,7 +47,30 @@ export function OrderSection() {
   return (
     <section className="order section" id="order">
       <Reveal className="section-heading section-heading--center section-heading--order">
-        <h2>ЦІНА — 700 ГРН.</h2>
+        <h2>ЦІНА</h2>
+      </Reveal>
+      <Reveal className="order-cost-reveal" delay={60}>
+        <div className="order-products">
+          <article className="order-product order-product--digital" aria-disabled="true">
+            <span className="order-product-label">Електронна книга</span>
+            <strong className="order-product-price">00 <small>грн</small></strong>
+            <span className="order-product-status">СКОРО В ПРОДАЖУ</span>
+          </article>
+          <article className="order-product order-product--paper">
+            <picture className="order-cost-picture">
+              <source media="(max-width: 700px)" srcSet={mobileOrderImage} />
+              <img className="order-cost" src={costImage} alt="Вартість паперової книги — 700 гривень" />
+            </picture>
+            <div className="order-cost-copy">
+              <span>Паперова книга</span>
+              <strong>700 <small>грн</small></strong>
+              <a href="#order">ЗАМОВИТИ</a>
+            </div>
+          </article>
+        </div>
+      </Reveal>
+      <Reveal className="section-heading section-heading--order-form" delay={100}>
+        <h2>ФОРМА ЗАМОВЛЕННЯ</h2>
       </Reveal>
       <Reveal className="order-form-reveal" delay={120}>
         <form className="order-form" onSubmit={handleSubmit}>
@@ -53,14 +80,17 @@ export function OrderSection() {
           </div>
           <FormField label="ТЕЛЕФОН" name="phone" placeholder="+380 (__) ___ __ __" type="tel" required />
           <FormField label="E-MAIL" name="email" placeholder="name@company.com" type="email" required />
-          <FormField label="АДРЕСА ДОСТАВКИ" name="address" placeholder="Місто, відділення або адреса" required />
+          <NovaPoshtaFields value={delivery} onChange={setDelivery} />
           <label className="payment-field">
             <span>СПОСІБ ОПЛАТИ</span>
-            <PaymentSelect />
+            <div className="payment-select payment-select--static">
+              <input type="hidden" name="payment" value="card" />
+              <span className="payment-select__trigger">Онлайн-оплата карткою</span>
+            </div>
           </label>
           <label>КОМЕНТАР<textarea name="comment" placeholder="Ваш коментар" rows={3} /></label>
           <button className="outline-button submit-button" type="submit">
-            {submitState === 'sending' ? 'ОБРОБЛЯЄМО...' : submitState === 'success' ? 'ЗАЯВКУ ОТРИМАНО' : 'ЗАМОВИТИ'}
+            {submitState === 'sending' ? 'ОБРОБЛЯЄМО...' : submitState === 'success' ? 'ЗАЯВКУ ОТРИМАНО' : 'ЗАМОВИТИ КНИГУ'}
           </button>
           {submitState === 'error' && <p className="order-error">{errorMessage}</p>}
         </form>
@@ -80,73 +110,5 @@ type FormFieldProps = {
 function FormField({ label, name, placeholder, type = 'text', required = false }: FormFieldProps) {
   return (
     <label>{label}<input name={name} placeholder={placeholder} type={type} required={required} /></label>
-  )
-}
-
-const paymentOptions = [
-  { value: 'card', label: 'Онлайн-оплата карткою' },
-  { value: 'cash', label: 'Післяплата' },
-] as const
-
-function PaymentSelect() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [value, setValue] = useState<(typeof paymentOptions)[number]['value']>('card')
-  const selectRef = useRef<HTMLDivElement>(null)
-  const selectedOption = paymentOptions.find((option) => option.value === value) ?? paymentOptions[0]
-
-  useEffect(() => {
-    if (!isOpen) return
-
-    function handlePointerDown(event: PointerEvent) {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) setIsOpen(false)
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setIsOpen(false)
-    }
-
-    document.addEventListener('pointerdown', handlePointerDown)
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('pointerdown', handlePointerDown)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isOpen])
-
-  return (
-    <div className="payment-select" ref={selectRef}>
-      <input type="hidden" name="payment" value={value} />
-      <button
-        className="payment-select__trigger"
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((open) => !open)}
-      >
-        <span>{selectedOption.label}</span>
-        <span className="select-chevron" aria-hidden="true" />
-      </button>
-      {isOpen && (
-        <div className="payment-select__menu" role="listbox" aria-label="Спосіб оплати">
-          {paymentOptions.map((option) => (
-            <button
-              className={`payment-select__option ${option.value === value ? 'is-selected' : ''}`}
-              key={option.value}
-              type="button"
-              role="option"
-              aria-selected={option.value === value}
-              onClick={() => {
-                setValue(option.value)
-                setIsOpen(false)
-              }}
-            >
-              <span>{option.label}</span>
-              {option.value === value && <span className="payment-select__check" aria-hidden="true">↗</span>}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
   )
 }

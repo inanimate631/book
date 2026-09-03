@@ -4,11 +4,9 @@ export type OrderPayload = {
   phone: string
   email: string
   address: string
-  payment: 'card' | 'cash'
+  payment: 'card'
   comment: string
 }
-
-const emailEndpoint = 'https://formsubmit.co/ajax/book@denkiiashko.com'
 
 export async function createCardInvoice(order: OrderPayload) {
   const response = await fetch('/api/create-invoice', {
@@ -23,27 +21,4 @@ export async function createCardInvoice(order: OrderPayload) {
   }
 
   return data.pageUrl
-}
-
-export async function submitCashOrder(order: OrderPayload) {
-  const payload = new URLSearchParams({
-    name: order.name,
-    surname: order.surname,
-    phone: order.phone,
-    email: order.email,
-    address: order.address,
-    payment: 'Післяплата',
-    comment: order.comment,
-    _replyto: order.email,
-    _subject: 'Замовлення книги — післяплата',
-    _template: 'table',
-  })
-
-  const response = await fetch(emailEndpoint, {
-    method: 'POST',
-    headers: { Accept: 'application/json' },
-    body: payload,
-  })
-
-  if (!response.ok) throw new Error('Не вдалося надіслати замовлення')
 }
