@@ -11,9 +11,9 @@
 
 .hero-wrapper {
   position: relative;
-  width: min(var(--hero-image-width), calc(100% - var(--hero-side-space)));
+  width: 80%;
   aspect-ratio: 1104 / 837;
-  margin-left: 11%;
+  margin-left: 15%;
   container-type: inline-size;
 }
 
@@ -295,6 +295,17 @@
 
 .business-page > .footer {
   display: none;
+}
+
+.business-page .header-button--fixed{
+  right: max(20px, (100% - 1280px) / 2 + 20px + 40px);
+}
+
+@media ((max-width: 1300px)) {
+  .hero {
+    
+   
+  }
 }
 
 @media ((max-width: 1200px)) {
