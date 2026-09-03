@@ -75,15 +75,15 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="contact-field">
               <label htmlFor="contact-name">ВАШЕ ІМ’Я</label>
-              <input id="contact-name" name="name" autoComplete="name" required />
+              <input id="contact-name" name="name" autoComplete="name" placeholder="· ОБОВ’ЯЗКОВЕ ПОЛЕ" required />
             </div>
             <div className="contact-field">
               <label htmlFor="contact-email">E-MAIL</label>
-              <input id="contact-email" name="email" type="email" autoComplete="email" required />
+              <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="· ОБОВ’ЯЗКОВЕ ПОЛЕ" required />
             </div>
             <div className="contact-field contact-field--comment">
               <label htmlFor="contact-comment">КОМЕНТАРІЙ</label>
-              <textarea id="contact-comment" name="comment" rows={4} required />
+              <textarea id="contact-comment" name="comment" rows={4} placeholder={'Наприклад\n\nмаю проблему з апсейсами'} required />
             </div>
             {submitState === 'error' && <p className="contact-error">Не вдалося надіслати повідомлення. Спробуйте ще раз.</p>}
             <button className="outline-button contact-submit" type="submit" disabled={submitState === 'sending'}>
