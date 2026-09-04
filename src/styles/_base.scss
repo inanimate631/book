@@ -102,9 +102,15 @@ main {
   }
 
   .nav {
-    gap: 24px;
-    padding-right: 28px;
-    padding-left: 28px;
+    flex: 0 1 auto;
+    width: max-content;
+    max-width: min(620px, calc(100vw - 340px));
+    height: 42px;
+    margin-top: 14px;
+    gap: 20px;
+    padding-right: 24px;
+    padding-left: 24px;
+    font-size: 16px;
   }
 }
 
@@ -200,5 +206,41 @@ textarea::placeholder {
     grid-row: 1;
     justify-self: end;
     margin-left: 0;
+  }
+}
+
+@media (min-width: 701px) and (max-height: 900px) {
+  .site-header .nav {
+    flex: 0 1 auto;
+    width: max-content;
+    max-width: min(620px, calc(100vw - 340px));
+    height: 46px;
+    margin-top: 14px;
+    padding: 0 28px;
+    gap: 32px;
+    font-size: 18px;
+  }
+
+  .site-header .header-button {
+    position: relative;
+    right: 24px;
+  }
+}
+
+@media (min-width: 920px) and (max-height: 700px) {
+  .site-header .nav {
+    flex: 0 1 auto;
+    width: max-content;
+    max-width: 560px;
+    height: 38px;
+    margin-top: 12px;
+    padding: 0 22px;
+    gap: 24px;
+    font-size: 14px;
+  }
+
+  .site-header .header-button {
+    position: relative;
+    right: 24px;
   }
 }

@@ -565,6 +565,18 @@
   align-items: center;
 }
 
+@media (min-width: 701px) and (max-height: 900px) {
+  .book-intro-stage {
+    width: min(76.6667%, 1104px, calc(132svh - 145px));
+  }
+}
+
+@media (min-width: 701px) and (max-height: 800px) {
+  .book-intro-stage {
+    margin-left: 20%;
+  }
+}
+
 @media (max-width: 960px) {
   .book-intro-stage {
     margin-left: 13.5%;
@@ -601,7 +613,7 @@
   }
 
   .book-page .site-header:has(.mobile-menu-button[aria-expanded="true"]) {
-    z-index: 40;
+    z-index: 110;
   }
 
   .book-page .header-button {
@@ -654,6 +666,12 @@
 @media (max-width: 960px) {
   .book-intro-stage {
     margin-left: 11.5%;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 960px) {
+  .book-page .site-header {
+    padding: 10px 36px;
   }
 }
 

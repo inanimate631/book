@@ -70,8 +70,7 @@
 .hero-glow {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
+  background: radial-gradient(
       circle at 72% 56%,
       rgba(255, 65, 0, 0.85) 0 5%,
       transparent 23%
@@ -92,8 +91,7 @@
 }
 
 .hero-glow::before {
-  background:
-    repeating-linear-gradient(
+  background: repeating-linear-gradient(
       90deg,
       transparent 0 90px,
       rgba(0, 0, 0, 0.22) 91px 94px,
@@ -204,8 +202,7 @@
   padding: 35px 17px 18px;
   background: linear-gradient(128deg, #2914b9, #4025e9 60%, #241769);
   color: white;
-  box-shadow:
-    18px 18px 22px rgba(12, 0, 55, 0.43),
+  box-shadow: 18px 18px 22px rgba(12, 0, 55, 0.43),
     inset -9px 0 19px rgba(10, 0, 46, 0.22);
   transform: rotateY(-5deg) skewY(-1deg);
 }
@@ -299,8 +296,6 @@
 
 @media ((max-width: 1300px)) {
   .hero {
-    
-   
   }
 }
 
@@ -671,5 +666,70 @@
   .hero-cta {
     left: 20px;
     width: 228px;
+  }
+
+  .hero-copy {
+    left: 12px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+
+@media (min-width: 920px) and (max-height: 900px) {
+  .hero-wrapper {
+    transform: scale(.94);
+    transform-origin: top left;
+  }
+
+  .business-page .site-header,
+  .book-page .site-header {
+    transform: scale(.94);
+    transform-origin: top center;
+  }
+}
+
+@media (min-width: 920px) and (max-height: 800px) {
+  .hero-wrapper {
+    margin-left: 20%;
+    transform: scale(.86);
+  }
+
+  .business-page .site-header,
+  .book-page .site-header {
+    transform: scale(.86);
+  }
+}
+
+@media (min-width: 920px) and (max-height: 700px) {
+  .hero-wrapper {
+    transform: scale(.78);
+  }
+
+  .business-page .site-header,
+  .book-page .site-header {
+    transform: scale(.78);
+  }
+}
+
+@media (min-width: 961px) and (max-height: 900px) {
+  .business-page .site-header,
+  .book-page .site-header {
+    transform: translateX(-50%) scale(.94);
+  }
+}
+
+@media (min-width: 961px) and (max-height: 800px) {
+  .business-page .site-header,
+  .book-page .site-header {
+    transform: translateX(-50%) scale(.86);
+  }
+}
+
+@media (min-width: 961px) and (max-height: 700px) {
+  .business-page .site-header,
+  .book-page .site-header {
+    transform: translateX(-50%) scale(.78);
   }
 }
