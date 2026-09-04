@@ -5,7 +5,6 @@ import { NovaPoshtaFields } from '../NovaPoshtaFields'
 import type { NovaPoshtaSelection } from '../NovaPoshtaFields'
 import { Reveal } from '../Reveal'
 import costImage from '../../assets/cost.png'
-import mobileOrderImage from '../../assets/mobile/order.png'
 
 export function OrderSection() {
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
@@ -58,13 +57,12 @@ export function OrderSection() {
           </article>
           <article className="order-product order-product--paper">
             <picture className="order-cost-picture">
-              <source media="(max-width: 700px)" srcSet={mobileOrderImage} />
               <img className="order-cost" src={costImage} alt="Вартість паперової книги — 700 гривень" />
             </picture>
             <div className="order-cost-copy">
               <span>Паперова книга</span>
               <strong>700 <small>грн</small></strong>
-              <a href="#order">ЗАМОВИТИ</a>
+              <a href="#order-form">ЗАМОВИТИ</a>
             </div>
           </article>
         </div>
@@ -73,7 +71,7 @@ export function OrderSection() {
         <h2>ФОРМА ЗАМОВЛЕННЯ</h2>
       </Reveal>
       <Reveal className="order-form-reveal" delay={120}>
-        <form className="order-form" onSubmit={handleSubmit}>
+        <form id="order-form" className="order-form" onSubmit={handleSubmit}>
           <div className="form-grid form-grid--two">
             <FormField label="ІМ’Я" name="name" placeholder="Ваше ім’я" required />
             <FormField label="ПРІЗВИЩЕ" name="surname" placeholder="Ваше прізвище" required />

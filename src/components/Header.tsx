@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BrandMark } from './BrandMark'
 import { ContactModal } from './ContactModal'
 
@@ -16,6 +16,35 @@ type ExtendedHeaderProps = HeaderProps & { compact?: boolean }
 export function Header({ variant = 'default', compact = false }: ExtendedHeaderProps) {
   const [isContactOpen, setContactOpen] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const previousBodyOverflow = document.body.style.overflow
+    const previousDocumentOverflow = document.documentElement.style.overflow
+
+    document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target
+
+      if (!(target instanceof Node)) return
+      if (navRef.current?.contains(target) || menuButtonRef.current?.contains(target)) return
+
+      setMenuOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow
+      document.documentElement.style.overflow = previousDocumentOverflow
+      document.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [isMenuOpen])
 
   return (
     <>
@@ -23,14 +52,21 @@ export function Header({ variant = 'default', compact = false }: ExtendedHeaderP
         <a className="brand" href="/" aria-label="К — головна">
           <BrandMark />
         </a>
-        <nav className={`nav ${isMenuOpen ? 'is-open' : ''}`} aria-label="Головна навігація">
+        <nav ref={navRef} className={`nav ${isMenuOpen ? 'is-open' : ''}`} aria-label="Головна навігація">
           {navigation.map((item) => (
             <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
           ))}
           <a className="nav-mobile-book" href="/book" onClick={() => setMenuOpen(false)}>КНИГА</a>
         </nav>
+        <button className="outline-button header-button" type="button" onClick={() => {
+          setMenuOpen(false)
+          setContactOpen(true)
+        }}>
+          ЗВ’ЯЗАТИСЯ
+        </button>
         {compact && (
           <button
+            ref={menuButtonRef}
             className="mobile-menu-button"
             type="button"
             aria-label={isMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
@@ -42,11 +78,7 @@ export function Header({ variant = 'default', compact = false }: ExtendedHeaderP
             <span />
           </button>
         )}
-        <span className="header-button-slot" aria-hidden="true" />
       </header>
-      <button className="outline-button header-button header-button--fixed" type="button" onClick={() => setContactOpen(true)}>
-        ЗВ’ЯЗАТИСЯ
-      </button>
       <ContactModal key={isContactOpen ? 'open' : 'closed'} isOpen={isContactOpen} onClose={() => setContactOpen(false)} />
     </>
   )

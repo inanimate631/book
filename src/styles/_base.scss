@@ -1,6 +1,4 @@
-#root {
-  overflow: hidden;
-}
+
 
 .reveal {
   opacity: 0;
@@ -67,8 +65,10 @@ main {
 
 .nav {
   max-width: 764px;
+  min-width: 0;
   height: 50px;
-  width: max-content;
+  width: auto;
+  flex: 1 1 764px;
   margin: 0 auto;
   margin-top: 12px;
   padding: 0 42px;
@@ -93,6 +93,18 @@ main {
 
   @media (max-width: 1124px) {
     gap: 24px;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1124px) {
+  .site-header {
+    gap: 24px;
+  }
+
+  .nav {
+    gap: 24px;
+    padding-right: 28px;
+    padding-left: 28px;
   }
 }
 
@@ -149,28 +161,44 @@ main {
   transform: translateY(-2px);
 }
 
+input,
+textarea,
+input::placeholder,
+textarea::placeholder {
+  font-family: var(--font-ui);
+}
+
 .header-button {
   white-space: nowrap;
   min-height: 50px;
-}
-
-.header-button-slot {
-  flex: 0 0 153px;
-  height: 50px;
-}
-
-.header-button--fixed {
-  position: fixed;
-  top: 36px;
-  right: max(20px, calc((100% - 1280px) / 2 + 20px));
-  z-index: 100;
+  flex: 0 0 auto;
 }
 
 @media (max-width: 960px) {
-  .header-button--fixed {
-    position: fixed;
-    top: 94px;
-    height: 34px;
-    min-height: 34px;
+  .site-header--compact {
+    display: grid;
+    grid-template-columns: minmax(34px, 1fr) auto;
+    grid-template-rows: 40px 34px;
+    column-gap: 12px;
+    row-gap: 23px;
+  }
+
+  .site-header--compact .header-button {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  .site-header--compact .brand {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .site-header--compact .mobile-menu-button {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    margin-left: 0;
   }
 }

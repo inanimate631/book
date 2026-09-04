@@ -29,7 +29,7 @@ export function NotFoundPage() {
           <DownArrow />
         </a>
 
-        <a id="not-found-order" className="not-found-order" href="/book#order">
+        <a id="not-found-order" className="not-found-order" href="/book#order-form">
           ЗАМОВИТИ КНИГУ
         </a>
 

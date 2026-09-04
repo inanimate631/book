@@ -6,8 +6,7 @@ export function ContentsSection() {
     <section className="contents section" id="contents">
       <Reveal className="section-heading section-heading--contents">
         <h2>
-          <span className="contents-heading-desktop">ЗМІСТ</span>
-          <span className="contents-heading-mobile">ДЕМО</span>
+          <span className="contents-heading">ДЕМО</span>
         </h2>
       </Reveal>
       <div className="contents-layout">

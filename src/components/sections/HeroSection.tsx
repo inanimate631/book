@@ -26,7 +26,7 @@ export function HeroSection() {
           </a>
         </Reveal>
         <Reveal className="hero-cta" delay={300} rootMargin="0px">
-          <a className="outline-button" href="/book#order">ЗАМОВИТИ КНИГУ</a>
+          <a className="outline-button" href="/book#order-form">ЗАМОВИТИ КНИГУ</a>
         </Reveal>
         <a className="hero-book-mobile" href="/book" aria-label="Перейти до книги">
           <img className="hero-book-mobile-shape" src={bookMobileShape} alt="Обкладинка книги «Як продати майже все»" />
