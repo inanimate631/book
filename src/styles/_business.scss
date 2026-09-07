@@ -337,15 +337,22 @@
     top: 21px;
     left: 0;
     width: 100%;
-    height: 117px;
-    padding: 10px 12px;
+    height: 74px;
+    padding: 10px 36px;
     align-items: center;
     transform: none;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: 48px;
+    column-gap: 28px;
+    row-gap: 0;
   }
 
   .business-page .site-header .mark {
     width: 34px;
     height: 34px;
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .business-page .nav {
@@ -356,6 +363,12 @@
     display: flex;
     position: relative;
     z-index: 2;
+    grid-column: 3;
+    grid-row: 1;
+    width: clamp(40px, 9.64cqw, 48px);
+    height: clamp(40px, 9.64cqw, 48px);
+    flex-basis: clamp(40px, 9.64cqw, 48px);
+    margin-left: 0;
   }
 
   .business-page .site-header:has(.mobile-menu-button[aria-expanded="true"]) {
@@ -400,34 +413,40 @@
   }
 
   .business-page .header-button {
-    width: 150px;
-    height: 34px;
-    min-height: 34px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    width: clamp(140px, 36.15cqw, 180px);
+    height: clamp(32px, 8.43cqw, 42px);
+    min-height: clamp(32px, 8.43cqw, 42px);
     background: #000;
     color: var(--white);
-    font-size: 16px;
+    font-size: clamp(14px, 3.2cqw, 16px);
   }
 
   .hero {
     --hero-mobile-gutter: 17px;
     max-width: none;
-    padding: 94px 0 0;
+    padding: 129px 0 0;
     flex: 1 0 auto;
   }
 
   .hero-wrapper {
     width: 100%;
-    height: 761px;
+    height: 178cqw;
     aspect-ratio: auto;
     margin: 0;
-    container-type: normal;
+    container-type: inline-size;
   }
 
   .hero-card {
     top: 0;
     left: var(--hero-mobile-gutter);
+    right: auto;
+    bottom: auto;
     width: calc(100% - (var(--hero-mobile-gutter) * 2));
-    height: 328px;
+    height: auto;
+    aspect-ratio: 390 / 250;
     border-radius: 12px 12px 12px 0;
   }
 
@@ -436,16 +455,17 @@
   }
 
   .hero-copy {
-    top: 132px;
-    left: calc(var(--hero-mobile-gutter) + 20px);
+    top: 27cqw;
+    left: calc(var(--hero-mobile-gutter) + 30px);
   }
 
   .hero h1 {
     line-height: 0.9;
+    font-size: clamp(36px, 9.5cqw, 48px);
   }
 
   .hero-social {
-    top: 680px;
+    top: 159cqw;
     left: 0;
     width: 100%;
   }
@@ -453,50 +473,56 @@
   .hero-social .socials {
     flex-direction: row;
     justify-content: center;
-    gap: 46px;
+    gap: 10cqw;
+  }
+
+  .hero-social .socials a,
+  .hero-social .socials a img {
+    width: clamp(30px, 7.2cqw, 36px);
+    height: clamp(30px, 7.2cqw, 36px);
   }
 
   .hero-cta {
-    top: 293px;
-    left: calc(var(--hero-mobile-gutter) + 19px);
+    top: 67cqw;
+    left: 17cqw;
     bottom: auto;
-    width: 274px;
+    width: 65.5cqw;
   }
 
   .hero-cta .outline-button {
-    height: 34px;
-    min-height: 34px;
+    height: clamp(33px, 8.43cqw, 42px);
+    min-height: clamp(33px, 8.43cqw, 42px);
     border: 0;
     background: var(--white);
     color: var(--black);
-    font-size: 15px;
+    font-size: clamp(13px, 3.2cqw, 16px);
   }
 
   .hero-book-mobile {
     position: absolute;
-    top: 372px;
+    top: 85cqw;
     left: 0;
     display: block;
     width: 100%;
-    height: 279px;
+    height: 69cqw;
   }
 
   .hero-book-mobile-shape {
     display: block;
-    margin-left: var(--hero-mobile-gutter);
-    width: 288px;
-    height: 279px;
+    margin-left: 2.4cqw;
+    width: 69cqw;
+    height: auto;
   }
 
   .hero-phone-arrow {
     position: absolute;
-    top: 90px;
-    left: min(250px, calc(100% - 70px));
+    top: 24cqw;
+    left: 63cqw;
     right: 0;
-    height: 90px;
+    height: 18cqw;
     display: flex;
     align-items: center;
-    border-radius: 45px 0 0 45px;
+    border-radius: 9cqw 0 0 9cqw;
     background: linear-gradient(
       90deg,
       #3925ff 0%,
@@ -508,10 +534,10 @@
 
   .hero-phone-arrow img {
     display: block;
-    flex: 0 0 70px;
-    width: 70px;
-    height: 70px;
-    padding-left: 10px;
+    flex: 0 0 min(14cqw, 70px);
+    width: min(14cqw, 70px);
+    height: min(14cqw, 70px);
+    padding-left: 2cqw;
   }
 
   .business-page > .footer {
@@ -664,12 +690,12 @@
 
 @media (max-width: 420px) {
   .hero-cta {
-    left: 20px;
-    width: 228px;
+    left: 17cqw;
+    width: 65.5cqw;
   }
 
   .hero-copy {
-    left: 12px;
+    left: calc(var(--hero-mobile-gutter) + 30px);
   }
 
   .hero h1 {

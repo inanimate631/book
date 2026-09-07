@@ -1,6 +1,5 @@
 import blueBook from '../../assets/blue.png'
-import mobileBook from '../../assets/mobile/mobile-book.png'
-import mobileBook2 from '../../assets/mobile/mobile-book2.png'
+import mobileHero2 from '../../assets/mobile/Hero-2.png'
 import { Reveal } from '../Reveal'
 import { SocialLinks } from '../SocialLinks'
 
@@ -10,8 +9,7 @@ export function BookIntroSection() {
       <div className="book-intro-stage">
         <Reveal className="book-intro-card">
           <picture className="book-intro-picture">
-            <source media="(max-width: 500px)" srcSet={mobileBook2} />
-            <source media="(max-width: 700px)" srcSet={mobileBook} />
+            <source media="(max-width: 700px)" srcSet={mobileHero2} />
             <img className="book-intro-background" src={blueBook} alt="Синя обкладинка книги" />
           </picture>
         </Reveal>

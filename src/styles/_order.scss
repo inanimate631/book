@@ -175,6 +175,17 @@
   margin: 0 auto;
   display: grid;
   gap: var(--form-field-gap);
+  font-family: var(--font-ui);
+}
+
+.order-form input,
+.order-form textarea,
+.order-form button,
+.order-form select,
+.order-form option,
+.order-form input::placeholder,
+.order-form textarea::placeholder {
+  font-family: var(--font-ui);
 }
 
 .form-grid {
@@ -260,7 +271,7 @@
   padding: 15px 19px;
   background: #b9b9b9;
   color: #111;
-  font-family: var(--font-content);
+  font-family: var(--font-ui);
   font-size: 16px;
   line-height: 1.2;
   cursor: pointer;
@@ -307,7 +318,7 @@
   padding: 10px 13px;
   background: transparent;
   color: #111;
-  font-family: var(--font-content);
+  font-family: var(--font-ui);
   font-size: 15px;
   line-height: 1.3;
   text-align: left;
@@ -407,7 +418,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  font-family: var(--font-content);
+  font-family: var(--font-ui);
   cursor: pointer;
 }
 
@@ -440,7 +451,7 @@
   padding: 10px 13px;
   background: transparent;
   color: #111;
-  font-family: var(--font-content);
+  font-family: var(--font-ui);
   font-size: 13px;
   line-height: 1.3;
   text-align: left;

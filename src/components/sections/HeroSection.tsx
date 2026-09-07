@@ -2,7 +2,7 @@ import heroBackground from '../../assets/Hero.png'
 import blackArrow from '../../assets/b-arrow.svg'
 import mobileBlackArrow from '../../assets/black-arrow.svg'
 import bookMobileShape from '../../assets/Subtract.png'
-import mobileHeroBackground from '../../assets/mobile/mobile-main.png'
+import mobileHeroBackground from '../../assets/mobile/mobile-hero.png'
 import { Reveal } from '../Reveal'
 import { SocialLinks } from '../SocialLinks'
 

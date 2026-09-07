@@ -694,15 +694,15 @@
     width: 100%;
     max-width: none;
     min-height: 0;
-    padding: 94px 17px 64px;
+    padding: 129px 18px 46px;
   }
 
   .book-intro-stage {
-    width: 100%;
+    width: calc(100% - 16px);
     max-width: none;
     height: auto;
     aspect-ratio: auto;
-    margin: 0;
+    margin: 0 0 0 16px;
   }
 
   .book-intro-card {
@@ -730,24 +730,66 @@
   }
 
   .book-intro-cta {
-    position: static;
-    margin: 44px auto 0;
-    width: 300px;
+    margin: 140px auto 0;
+    width: 75%;
+    position: relative;
+    left: 6px;
   }
 
   .book-intro-cta .outline-button {
     width: 100%;
-    min-height: 35px;
+    min-height: clamp(48px, 8vw, 60px);
     border: 0;
     background: linear-gradient(90deg, #fa5600, #ff5a00);
     box-shadow: 0 8px 14px rgba(255, 55, 0, 0.42);
     color: var(--white);
-    font-size: 15px;
+    font-size: clamp(16px, 3.2vw, 24px);
   }
 
   .book-page .nav.is-open {
     left: 112px;
     width: calc(100% - 129px);
+  }
+
+  .book-page .site-header {
+    top: 21px;
+    left: 0;
+    width: 100%;
+    height: 74px;
+    padding: 10px 36px;
+    align-items: center;
+    transform: none;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: 48px;
+    column-gap: 28px;
+    row-gap: 0;
+  }
+
+  .book-page .site-header .mark {
+    width: 34px;
+    height: 34px;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .book-page .mobile-menu-button {
+    grid-column: 3;
+    grid-row: 1;
+    width: clamp(40px, 9.64cqw, 48px);
+    height: clamp(40px, 9.64cqw, 48px);
+    flex-basis: clamp(40px, 9.64cqw, 48px);
+    margin-left: 0;
+  }
+
+  .book-page .header-button {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    width: clamp(140px, 36.15cqw, 180px);
+    height: clamp(32px, 8.43cqw, 42px);
+    min-height: clamp(32px, 8.43cqw, 42px);
+    font-size: clamp(14px, 3.2cqw, 16px);
   }
 
   .section {
