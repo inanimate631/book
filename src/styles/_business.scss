@@ -774,12 +774,8 @@
   }
 }
 
-
-
-  .hero-copy {
-    @media (min-width: 488px) {
-      h1 {
-        font-size: 48px;
-      }
-    }
+@media (min-width: 488px) and (max-width: 701px) {
+  .hero-copy h1 {
+    font-size: 48px;
   }
+}
