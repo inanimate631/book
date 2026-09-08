@@ -221,6 +221,19 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.form-grid--two > label {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
+}
+
+.form-grid--two > label > input {
+  min-width: 0;
+  max-width: none;
+}
+
 .order-form label {
   display: flex;
   align-items: center;
@@ -814,5 +827,17 @@
   .order-cost-copy small,
   .order-cost-preorder {
     font-size: 12px;
+  }
+}
+
+@media (max-height: 835px) {
+  .order-cost-copy {
+    padding-left: 6%;
+  }
+
+  .order-cost-copy span,
+  .order-cost-copy small,
+  .order-cost-preorder {
+    font-size: 16px;
   }
 }

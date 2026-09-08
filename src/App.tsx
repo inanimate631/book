@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './styles/main.scss'
 import { BookLandingPage } from './pages/BookLandingPage'
 import { BusinessConsultingPage } from './pages/BusinessConsultingPage'
@@ -6,6 +7,10 @@ import { NotFoundPage } from './pages/NotFoundPage'
 
 function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
+
+  useEffect(() => {
+    document.title = pathname.startsWith('/book') ? 'how to sell everything' : 'DK Consulting'
+  }, [pathname])
 
   if (pathname === '/privacy-policy') return <LegalPage type="privacy" />
   if (pathname === '/terms-of-use') return <LegalPage type="terms" />
