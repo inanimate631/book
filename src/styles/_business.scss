@@ -835,7 +835,7 @@
   }
 }
 
-@media (max-height: 820px) {
+@media (max-height: 820px) and (min-width: 700px)  {
   .hero-wrapper {
     margin-left: 9%;
   }
