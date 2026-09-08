@@ -8,9 +8,13 @@ const legalLinks = [
   { label: "Cookies", href: "/cookies" },
 ];
 
-export function Footer() {
+type FooterProps = {
+  variant?: 'business' | 'book' | 'legal' | 'not-found'
+}
+
+export function Footer({ variant = 'business' }: FooterProps) {
   return (
-    <footer className="footer" id="footer">
+    <footer className={`footer footer--${variant}`} id="footer">
       <div className="footer-top">
         <div className="footer-block footer-block--brand">
           <BrandMark dark />

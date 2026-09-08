@@ -25,6 +25,14 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
   const warehouseRequest = useRef(0)
   const fieldsRef = useRef<HTMLDivElement>(null)
 
+  function getLoadErrorMessage(error: unknown, fallback: string) {
+    if (error instanceof TypeError && /failed to fetch/i.test(error.message)) {
+      return 'Не вдалося завантажити дані. Перевірте з’єднання та спробуйте ще раз.'
+    }
+
+    return error instanceof Error ? error.message : fallback
+  }
+
   useEffect(() => {
     function handlePointerDown(event: PointerEvent) {
       if (fieldsRef.current && !fieldsRef.current.contains(event.target as Node)) {
@@ -62,7 +70,7 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
       } catch (error) {
         if (requestId === cityRequest.current) {
           setCityOptions([])
-          setLoadError(error instanceof Error ? error.message : 'Помилка завантаження міст')
+          setLoadError(getLoadErrorMessage(error, 'Помилка завантаження міст'))
         }
       } finally {
         if (requestId === cityRequest.current) setLoadingCities(false)
@@ -83,7 +91,7 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
       .catch((error: unknown) => {
         if (requestId === warehouseRequest.current) {
           setWarehouseOptions([])
-          setLoadError(error instanceof Error ? error.message : 'Помилка завантаження відділень')
+          setLoadError(getLoadErrorMessage(error, 'Помилка завантаження відділень'))
         }
       })
       .finally(() => {
@@ -176,7 +184,11 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
         </div>
       </label>
 
-      {loadError && <p className="nova-error">{loadError}</p>}
+      {loadError && (
+        <p className="nova-error" role="alert" aria-live="polite">
+          {loadError}
+        </p>
+      )}
       <input type="hidden" name="city" value={value.city?.label ?? ''} />
       <input type="hidden" name="cityRef" value={value.city?.ref ?? ''} />
       <input type="hidden" name="warehouse" value={value.warehouse?.label ?? ''} />

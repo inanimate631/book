@@ -146,20 +146,22 @@ export function LegalPage({ type }: LegalPageProps) {
   const content = pageContent[type]
 
   return (
-    <main className="legal-page">
-      <Header variant="book" />
-      <article className="legal-content">
-        <a className="legal-back" href="/book">← ПОВЕРНУТИСЯ ДО САЙТУ</a>
-        <h1>{content.title}</h1>
-        <p className="legal-intro">{content.intro}</p>
-        {content.sections.map((section) => (
-          <section className="legal-section" key={section.title}>
-            <h2>{section.title}</h2>
-            {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </section>
-        ))}
-      </article>
-      <Footer />
-    </main>
+    <>
+      <main className="legal-page">
+        <Header variant="book" />
+        <article className="legal-content">
+          <a className="legal-back" href="/book">← ПОВЕРНУТИСЯ ДО САЙТУ</a>
+          <h1>{content.title}</h1>
+          <p className="legal-intro">{content.intro}</p>
+          {content.sections.map((section) => (
+            <section className="legal-section" key={section.title}>
+              <h2>{section.title}</h2>
+              {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </section>
+          ))}
+        </article>
+      </main>
+      <Footer variant="legal" />
+    </>
   )
 }

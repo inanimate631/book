@@ -7,13 +7,15 @@ import { Footer } from '../components/Footer'
 
 export function BookLandingPage() {
   return (
-    <main className="book-page">
-      <Header variant="book" compact />
-      <BookIntroSection />
-      <QuotesSection />
-      <ContentsSection />
-      <OrderSection />
-      <Footer />
-    </main>
+    <>
+      <main className="book-page">
+        <Header variant="book" compact />
+        <BookIntroSection />
+        <QuotesSection />
+        <ContentsSection />
+        <OrderSection />
+      </main>
+      <Footer variant="book" />
+    </>
   )
 }

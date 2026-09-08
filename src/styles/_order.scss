@@ -96,27 +96,34 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  padding: 18% 13% 0;
+  padding: 14% 10% 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: clamp(8px, 1.1vw, 14px);
   color: var(--white);
   font-family: var(--font-ui);
 }
 
 .order-cost-copy span {
-  font-size: 20px;
+  font-size: clamp(14px, 1.4vw, 20px);
+}
+
+.order-cost-preorder {
+  font-size: clamp(12px, 1.25vw, 18px);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .order-cost-copy strong {
-  margin-top: 11px;
-  font-size: 64px;
+  margin-top: 0;
+  font-size: clamp(32px, 5vw, 64px);
   font-weight: 400;
   line-height: 1;
 }
 
 .order-cost-copy small {
-  font-size: 20px;
+  font-size: clamp(14px, 1.4vw, 20px);
 }
 
 .order-cost-copy a {
@@ -141,6 +148,7 @@
 
 .section-heading--order-form {
   margin: 105px 0 80px;
+  justify-content: center;
   text-align: center;
 }
 
@@ -498,10 +506,15 @@
 }
 
 .nova-error {
-  grid-column: 2;
+  grid-column: 1 / -1;
+  justify-self: end;
+  width: min(100%, 700px);
   margin: -18px 0 0;
+  padding: 0 4px;
   color: #ffd6d6;
   font-size: 13px;
+  line-height: 1.25;
+  white-space: normal;
 }
 
 .nova-poshta-fields input[type='hidden'] {
@@ -601,7 +614,8 @@
   .section-heading--order-form {
     display: block;
     margin: 110px 0 42px;
-    text-align: center;
+    padding-left: 12px;
+    text-align: left;
   }
 
   .order-cost {
@@ -615,19 +629,24 @@
 
   .order-cost-copy {
     display: flex;
+    padding: 18% 10% 0;
+    gap: clamp(8px, 1.5vw, 12px);
   }
 
   .order-cost-copy span {
-    font-size: 14px;
+    font-size: clamp(14px, 3.6vw, 20px);
+  }
+
+  .order-cost-preorder {
+    font-size: clamp(12px, 3.2vw, 18px);
   }
 
   .order-cost-copy strong {
-    margin-top: 13px;
-    font-size: 32px;
+    font-size: clamp(32px, 8.2vw, 64px);
   }
 
   .order-cost-copy small {
-    font-size: 14px;
+    font-size: clamp(14px, 3.6vw, 20px);
   }
 
   .order-cost-copy a {
@@ -720,9 +739,12 @@
   }
 
   .nova-error {
-    grid-column: 2;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
     margin: 0;
-    font-size: 8px;
+    padding: 0;
+    font-size: 10px;
     white-space: normal;
   }
 
@@ -752,5 +774,45 @@
     background: linear-gradient(90deg, #3925ff 0%, #d96570 100%);
     box-shadow: 0 8px 16px rgba(172, 23, 63, .48);
     font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .order-cost-copy span,
+  .order-cost-copy small,
+  .order-cost-preorder {
+    font-size: 13px;
+  }
+
+  .order-cost-copy strong {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 370px) {
+  .order-cost-copy {
+    padding-left: 6%;
+  }
+
+  .order-cost-copy span,
+  .order-cost-copy small,
+  .order-cost-preorder {
+    font-size: 12px;
+  }
+
+  .order-cost-copy strong {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 870px) {
+  .order-cost-copy {
+    padding-left: 6%;
+  }
+
+  .order-cost-copy span,
+  .order-cost-copy small,
+  .order-cost-preorder {
+    font-size: 12px;
   }
 }

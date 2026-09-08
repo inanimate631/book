@@ -1,3 +1,5 @@
+import { apiUrl } from './api'
+
 export type NovaPoshtaOption = {
   ref: string
   label: string
@@ -11,9 +13,9 @@ async function requestNovaPoshta<T>(url: string) {
 }
 
 export function searchNovaPoshtaCities(search: string) {
-  return requestNovaPoshta<NovaPoshtaOption[]>(`/api/nova-poshta/cities?search=${encodeURIComponent(search)}`)
+  return requestNovaPoshta<NovaPoshtaOption[]>(apiUrl(`/api/nova-poshta/cities?search=${encodeURIComponent(search)}`))
 }
 
 export function getNovaPoshtaWarehouses(cityRef: string) {
-  return requestNovaPoshta<NovaPoshtaOption[]>(`/api/nova-poshta/warehouses?cityRef=${encodeURIComponent(cityRef)}`)
+  return requestNovaPoshta<NovaPoshtaOption[]>(apiUrl(`/api/nova-poshta/warehouses?cityRef=${encodeURIComponent(cityRef)}`))
 }

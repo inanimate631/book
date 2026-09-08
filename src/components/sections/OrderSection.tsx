@@ -5,6 +5,7 @@ import { NovaPoshtaFields } from '../NovaPoshtaFields'
 import type { NovaPoshtaSelection } from '../NovaPoshtaFields'
 import { Reveal } from '../Reveal'
 import costImage from '../../assets/cost.png'
+import mobileCostImage from '../../assets/mobile/price-mobile.png'
 
 export function OrderSection() {
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
@@ -57,10 +58,12 @@ export function OrderSection() {
           </article>
           <article className="order-product order-product--paper">
             <picture className="order-cost-picture">
+              <source media="(max-width: 700px)" srcSet={mobileCostImage} />
               <img className="order-cost" src={costImage} alt="Вартість паперової книги — 700 гривень" />
             </picture>
             <div className="order-cost-copy">
               <span>Паперова книга</span>
+              <span className="order-cost-preorder">ПЕРЕДЗАМОВЛЕННЯ</span>
               <strong>700 <small>грн</small></strong>
               <a href="#order-form">ЗАМОВИТИ</a>
             </div>

@@ -1,3 +1,5 @@
+import { apiUrl } from './api'
+
 export type OrderPayload = {
   name: string
   surname: string
@@ -9,7 +11,7 @@ export type OrderPayload = {
 }
 
 export async function createCardInvoice(order: OrderPayload) {
-  const response = await fetch('/api/create-invoice', {
+  const response = await fetch(apiUrl('/api/create-invoice'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order),

@@ -481,9 +481,9 @@
 .book-pages-desktop {
   --book-stage-padding-x: clamp(24px, 3.2vw, 52px);
   position: relative;
-  width: 100vw;
+  width: 100%;
   padding: 32px var(--book-stage-padding-x) 34px;
-  margin-left: calc(50% - 50vw);
+  margin-left: 0;
   overflow: visible;
   background: linear-gradient(
     112deg,
@@ -496,9 +496,9 @@
 
 @media (min-width: 1441px) {
   .book-pages-desktop {
-    width: min(calc(100vw - 80px), 1600px);
-    margin-left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
+    margin-left: 0;
+    transform: none;
     border-radius: 32px 32px 32px 0;
   }
 }
