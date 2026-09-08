@@ -5,9 +5,49 @@
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 40px 20px 0;
+  padding: 40px 20px var(--desktop-scene-bottom-space, 0px);
   position: relative;
 }
+
+@media (min-width: 701px) {
+  // Treat the desktop landing page as one scene. Its width is limited by
+  // viewport height so the hero, header, social links and CTA stay together.
+  .business-page {
+    position: relative;
+    --desktop-scene-bottom-space: 35px;
+    width: min(100%, calc((100vh - 49px) * 1.5));
+    width: min(100%, calc((100dvh - 49px) * 1.5));
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 1324px) {
+  .business-page {
+    container-type: inline-size;
+  }
+
+  .business-page .nav {
+    gap: clamp(24px, calc(8.16cqw - 46px), 62px);
+    padding-inline: clamp(24px, calc(6.12cqw - 39px), 42px);
+    font-size: clamp(14px, calc(0.68cqw + 11px), 20px);
+    justify-content: center;
+    flex: unset;
+  }
+
+  .business-page .hero-wrapper {
+    margin-left: clamp(89px, calc(19.7cqw - 114px), 147px);
+
+    @media (max-height: 803px) {
+      margin-left: 9%;
+    }
+
+    @media (max-height: 803px) {
+      margin-left: 7%;
+    }
+  }
+}
+
 .hero-wrapper {
   position: relative;
   width: 88%;
@@ -137,6 +177,10 @@
   @media (max-width: 1215px) {
     left: -10%;
   }
+
+  @media (max-height: 810px) {
+    top: 36%;
+  }
 }
 
 .hero-social {
@@ -144,6 +188,10 @@
   z-index: 4;
   left: -5.43cqw;
   top: 70.9%;
+
+  @media (max-height: 810px) {
+    top: 64%;
+  }
 }
 
 .eyebrow {
@@ -162,6 +210,13 @@
   line-height: 0.95;
   margin: 0;
   width: max-content;
+}
+
+@media (min-width: 701px) {
+  .business-page .hero-copy h1 {
+    // Use the smaller value when the desktop scene is constrained by height.
+    font-size: clamp(40px, min(7.64vw, 9.96cqw), 110px);
+  }
 }
 
 .hero h1 em {
@@ -777,5 +832,11 @@
 @media (min-width: 488px) and (max-width: 701px) {
   .hero-copy h1 {
     font-size: 48px;
+  }
+}
+
+@media (max-height: 820px) {
+  .hero-wrapper {
+    margin-left: 9%;
   }
 }

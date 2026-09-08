@@ -5,6 +5,58 @@
   position: relative;
 }
 
+@media (min-width: 701px) {
+  // Use the same desktop scene width as the main page so both headers have
+  // identical dimensions at the same viewport size.
+  .book-page {
+    position: relative;
+    width: min(100%, calc((100vh - 49px) * 1.5));
+    width: min(100%, calc((100dvh - 49px) * 1.5));
+    max-width: 1440px;
+    margin-inline: auto;
+    container-type: inline-size;
+  }
+
+  .book-intro {
+    width: 100%;
+  }
+
+  .book-page .section h2 {
+    font-size: clamp(40px, min(5.56vw, 5.56cqw), 80px);
+  }
+
+  .book-page .quote-card__content {
+    padding: clamp(12px, 1.04cqw, 15px) clamp(36px, 3.61cqw, 52px);
+  }
+
+  .book-page .quote-card--right .quote-card__content {
+    padding-left: clamp(56px, 3.89cqw, 64px);
+    text-indent: clamp(36px, 4.17cqw, 60px);
+  }
+
+  .book-page .quote-card__content p.quote-card__text--desktop {
+    font-size: clamp(14px, calc(1.35cqw + 4.55px), 24px);
+  }
+
+  .book-page .quote-arrow {
+    --quote-arrow-size: clamp(40px, 3.47cqw, 50px);
+  }
+}
+
+@media (min-width: 1324px) {
+  .book-page .site-header {
+    width: min(1280px, calc(100% - 40px), 1280px);
+  }
+
+  .book-page .nav {
+    gap: clamp(24px, calc(8.16cqw - 46px), 62px);
+    padding-inline: clamp(24px, calc(6.12cqw - 39px), 42px);
+    font-size: clamp(14px, calc(0.68cqw + 11px), 20px);
+    justify-content: center;
+    flex: unset;
+  }
+}
+
 .book-intro-stage {
   position: relative;
   width: 76.6667%;
@@ -14,8 +66,8 @@
   container-type: inline-size;
 
   @media (max-width: 1404px) {
-    margin-left: 18%;
-    width: 76%;
+    margin-left: 10%;
+    width: 85%;
   }
 }
 
@@ -53,6 +105,12 @@
   font-size: var(--title-size);
   line-height: 0.78;
   letter-spacing: -0.07em;
+}
+
+@media (min-width: 701px) {
+  .book-intro-title {
+    font-size: clamp(40px, min(5.56vw, 7.25cqw), 80px);
+  }
 }
 
 .book-intro-title span,
@@ -380,6 +438,14 @@
   }
 }
 
+@media (min-width: 1324px) and (max-height: 900px) {
+  .book-page .book-pages-desktop {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    transform: none;
+  }
+}
+
 .book-flip {
   position: relative;
   z-index: 1;
@@ -570,18 +636,6 @@
   align-items: center;
 }
 
-@media (min-width: 701px) and (max-height: 900px) {
-  .book-intro-stage {
-    width: min(76.6667%, 1104px, calc(132svh - 145px));
-  }
-}
-
-@media (min-width: 701px) and (max-height: 800px) {
-  .book-intro-stage {
-    margin-left: 20%;
-  }
-}
-
 @media (max-width: 960px) {
   .book-intro-stage {
     margin-left: 13.5%;
@@ -661,21 +715,19 @@
 
 @media (max-width: 960px) {
   .book-intro-stage {
-    margin-left: 17.5%;
+    width: 86%;
+    margin-left: 9%;
     @media (max-width: 880px) {
-      margin-left: 16.5%;
-    }
-
-    @media (max-width: 820px) {
-      margin-left: 15.5%;
+      width: 82%;
+      margin-left: 10.5%;
     }
 
     @media (max-width: 795px) {
-      margin-left: 14.5%;
+      margin-left: 10%;
     }
 
     @media (max-width: 755px) {
-      margin-left: 13.5%;
+      margin-left: 9%;
     }
   }
 }

@@ -2,7 +2,7 @@ import { createVerify, randomUUID } from 'node:crypto'
 import http from 'node:http'
 import { getCities, getNovaPoshtaErrorStatus, getWarehouses } from '../api/_lib/novaPoshta.mjs'
 
-const port = Number(process.env.API_PORT || 8787)
+const port = Number(process.env.PORT || process.env.API_PORT || 8787)
 const host = process.env.API_HOST || '0.0.0.0'
 const publicBaseUrl = process.env.PUBLIC_APP_URL || 'http://127.0.0.1:5173'
 const monobankToken = process.env.MONOBANK_TOKEN

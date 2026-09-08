@@ -107,6 +107,11 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
     onChange({ ...value, warehouse })
   }
 
+  const warehouseLabel = isLoadingWarehouses
+    ? 'ЗАВАНТАЖЕННЯ...'
+    : value.warehouse?.label ?? (value.city ? 'Оберіть відділення' : 'Спочатку оберіть місто')
+  const warehouseIsPlaceholder = !value.warehouse
+
   return (
     <div className="nova-poshta-fields" ref={fieldsRef}>
       <label className="nova-field">
@@ -150,13 +155,13 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
         <span>ВІДДІЛЕННЯ</span>
         <div className="nova-combobox">
           <button
-            className="nova-warehouse-trigger"
+            className={`nova-warehouse-trigger${warehouseIsPlaceholder ? ' is-placeholder' : ''}`}
             type="button"
             disabled={!value.city || isLoadingWarehouses}
             aria-expanded={warehouseOpen}
             onClick={() => setWarehouseOpen((open) => !open)}
           >
-            <span>{isLoadingWarehouses ? 'ЗАВАНТАЖЕННЯ...' : value.warehouse?.label ?? (value.city ? 'Оберіть відділення' : 'Спочатку оберіть місто')}</span>
+            <span>{warehouseLabel}</span>
             <span className="select-chevron" aria-hidden="true" />
           </button>
           {warehouseOpen && warehouseOptions.length > 0 && (
