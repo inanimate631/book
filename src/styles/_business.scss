@@ -38,7 +38,7 @@
   .business-page .hero-wrapper {
     margin-left: clamp(89px, calc(19.7cqw - 114px), 147px);
 
-    @media (max-height: 803px) {
+    @media (max-height: 830px) {
       margin-left: 9%;
     }
 
@@ -835,7 +835,7 @@
   }
 }
 
-@media (max-height: 820px) and (min-width: 700px)  {
+@media (max-height: 820px) and (min-width: 700px) {
   .hero-wrapper {
     margin-left: 9%;
   }

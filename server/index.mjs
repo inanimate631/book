@@ -1,5 +1,6 @@
 import { createVerify, randomUUID } from 'node:crypto'
 import http from 'node:http'
+import { applyCorsHeaders, isAllowedOrigin } from '../api/_lib/cors.mjs'
 import { getCities, getNovaPoshtaErrorStatus, getWarehouses } from '../api/_lib/novaPoshta.mjs'
 
 const port = Number(process.env.PORT || process.env.API_PORT || 8787)
@@ -17,8 +18,6 @@ let monobankPublicKey
 function sendJson(response, status, payload) {
   response.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
   })
   response.end(JSON.stringify(payload))
 }
@@ -148,12 +147,15 @@ async function handleMonobankWebhook(request, response) {
 }
 
 const server = http.createServer(async (request, response) => {
+  applyCorsHeaders(response, request)
+
   if (request.method === 'OPTIONS') {
-    response.writeHead(204, {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    })
+    if (!isAllowedOrigin(request.headers.origin)) {
+      sendJson(response, 403, { message: 'Origin not allowed' })
+      return
+    }
+
+    response.writeHead(204)
     response.end()
     return
   }

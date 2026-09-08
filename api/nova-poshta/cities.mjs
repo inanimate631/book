@@ -1,6 +1,9 @@
 import { getCities, getNovaPoshtaErrorStatus } from '../_lib/novaPoshta.mjs'
+import { handleCors } from '../_lib/cors.mjs'
 
 export default async function handler(request, response) {
+  if (handleCors(request, response)) return
+
   if (request.method !== 'GET') {
     response.status(405).json({ message: 'Method not allowed' })
     return

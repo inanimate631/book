@@ -7,6 +7,7 @@ import {
   savePendingOrder,
   wasInvoiceNotified,
 } from './store.mjs'
+import { handleCors } from './cors.mjs'
 
 const monobankToken = process.env.MONOBANK_TOKEN
 const bookPrice = Number(process.env.BOOK_PRICE_UAH)
@@ -17,16 +18,11 @@ let monobankPublicKey
 
 export function sendJson(response, status, payload) {
   response.status(status).setHeader('Content-Type', 'application/json; charset=utf-8')
-  response.setHeader('Access-Control-Allow-Origin', '*')
-  response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-  response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   response.json(payload)
 }
 
 export function handleOptions(request, response) {
-  if (request.method !== 'OPTIONS') return false
-  sendJson(response, 204, {})
-  return true
+  return handleCors(request, response)
 }
 
 export async function readJsonBody(request) {

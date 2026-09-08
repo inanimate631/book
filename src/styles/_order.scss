@@ -110,7 +110,7 @@
 
 .order-cost-copy strong {
   margin-top: 11px;
-  font-size: 20px;
+  font-size: 64px;
   font-weight: 400;
   line-height: 1;
 }
@@ -141,6 +141,7 @@
 
 .section-heading--order-form {
   margin: 105px 0 80px;
+  text-align: center;
 }
 
 .order-placeholder {
@@ -600,7 +601,7 @@
   .section-heading--order-form {
     display: block;
     margin: 110px 0 42px;
-    text-align: left;
+    text-align: center;
   }
 
   .order-cost {
@@ -617,16 +618,16 @@
   }
 
   .order-cost-copy span {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .order-cost-copy strong {
     margin-top: 13px;
-    font-size: 31px;
+    font-size: 32px;
   }
 
   .order-cost-copy small {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .order-cost-copy a {
