@@ -16,6 +16,7 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
   const [citySearch, setCitySearch] = useState(value.city?.label ?? '')
   const [cityOptions, setCityOptions] = useState<NovaPoshtaOption[]>([])
   const [warehouseOptions, setWarehouseOptions] = useState<NovaPoshtaOption[]>([])
+  const [warehouseSearch, setWarehouseSearch] = useState(value.warehouse?.label ?? '')
   const [cityOpen, setCityOpen] = useState(false)
   const [warehouseOpen, setWarehouseOpen] = useState(false)
   const [isLoadingCities, setLoadingCities] = useState(false)
@@ -105,20 +106,22 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
     setCityOpen(false)
     setWarehouseOpen(false)
     setWarehouseOptions([])
+    setWarehouseSearch('')
     setLoadingWarehouses(true)
     setLoadError('')
     onChange({ city, warehouse: null })
   }
 
   function selectWarehouse(warehouse: NovaPoshtaOption) {
+    setWarehouseSearch(warehouse.label)
     setWarehouseOpen(false)
     onChange({ ...value, warehouse })
   }
 
-  const warehouseLabel = isLoadingWarehouses
-    ? 'ЗАВАНТАЖЕННЯ...'
-    : value.warehouse?.label ?? (value.city ? 'Оберіть відділення' : 'Спочатку оберіть місто')
-  const warehouseIsPlaceholder = !value.warehouse
+  const normalizedWarehouseSearch = warehouseSearch.trim().toLocaleLowerCase('uk-UA')
+  const visibleWarehouses = normalizedWarehouseSearch
+    ? warehouseOptions.filter((warehouse) => warehouse.label.toLocaleLowerCase('uk-UA').includes(normalizedWarehouseSearch))
+    : warehouseOptions
 
   return (
     <div className="nova-poshta-fields" ref={fieldsRef}>
@@ -141,6 +144,7 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
               setLoadError('')
               if (value.city) {
                 setWarehouseOptions([])
+                setWarehouseSearch('')
                 setLoadingWarehouses(false)
                 onChange({ city: null, warehouse: null })
               }
@@ -162,19 +166,32 @@ export function NovaPoshtaFields({ value, onChange }: NovaPoshtaFieldsProps) {
       <label className="nova-field">
         <span>ВІДДІЛЕННЯ</span>
         <div className="nova-combobox">
-          <button
-            className={`nova-warehouse-trigger${warehouseIsPlaceholder ? ' is-placeholder' : ''}`}
-            type="button"
-            disabled={!value.city || isLoadingWarehouses}
+          <input
+            className="nova-warehouse-input"
+            value={warehouseSearch}
+            placeholder={isLoadingWarehouses ? 'ЗАВАНТАЖЕННЯ...' : 'Введіть номер або назву відділення'}
+            autoComplete="off"
+            role="combobox"
             aria-expanded={warehouseOpen}
-            onClick={() => setWarehouseOpen((open) => !open)}
-          >
-            <span>{warehouseLabel}</span>
-            <span className="select-chevron" aria-hidden="true" />
-          </button>
-          {warehouseOpen && warehouseOptions.length > 0 && (
-            <div className="nova-options" role="listbox">
-              {warehouseOptions.map((warehouse) => (
+            aria-controls="nova-warehouse-options"
+            disabled={!value.city || isLoadingWarehouses}
+            onFocus={() => setWarehouseOpen(Boolean(value.city && warehouseOptions.length > 0))}
+            onChange={(event) => {
+              setWarehouseSearch(event.target.value)
+              setWarehouseOpen(true)
+              if (value.warehouse) onChange({ ...value, warehouse: null })
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') setWarehouseOpen(false)
+            }}
+          />
+          {warehouseOpen && value.city && (
+            <div className="nova-options" id="nova-warehouse-options" role="listbox">
+              {isLoadingWarehouses && <span className="nova-option nova-option--status">ЗАВАНТАЖЕННЯ...</span>}
+              {!isLoadingWarehouses && visibleWarehouses.length === 0 && (
+                <span className="nova-option nova-option--status">ВІДДІЛЕННЯ НЕ ЗНАЙДЕНО</span>
+              )}
+              {!isLoadingWarehouses && visibleWarehouses.map((warehouse) => (
                 <button className="nova-option" type="button" role="option" key={warehouse.ref} onClick={() => selectWarehouse(warehouse)}>
                   {warehouse.label}
                 </button>
